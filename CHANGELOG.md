@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Docs
+- ERR028 description and action no longer state a fixed 15-second wait. Duplicate SMS protection is opt-in per account and its window is set per account (10 seconds by default).
+
 ## [1.0.2] - 2026-04-19
 
 ### Approved
