@@ -4,8 +4,8 @@
 [![Moodle](https://img.shields.io/badge/Moodle-4.3+-orange.svg)](https://moodle.org)
 [![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4.svg)](https://www.php.net)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![GitHub issues](https://img.shields.io/github/issues/boxlinknet/moodle-local_kwtsms)](https://github.com/boxlinknet/moodle-local_kwtsms/issues)
-[![GitHub release](https://img.shields.io/github/v/release/boxlinknet/moodle-local_kwtsms?include_prereleases)](https://github.com/boxlinknet/moodle-local_kwtsms/releases)
+[![GitHub issues](https://img.shields.io/github/issues/kwtsms/moodle-local_kwtsms)](https://github.com/kwtsms/moodle-local_kwtsms/issues)
+[![GitHub release](https://img.shields.io/github/v/release/kwtsms/moodle-local_kwtsms?include_prereleases)](https://github.com/kwtsms/moodle-local_kwtsms/releases)
 
 Send SMS notifications to students and administrators via the kwtSMS gateway (kwtsms.com).
 
@@ -72,7 +72,7 @@ Pick whichever option suits your workflow. All three install the same version.
 ### Option 2: Upload a ZIP
 
 1. Download the latest release ZIP from the
-   [GitHub releases page](https://github.com/boxlinknet/moodle-local_kwtsms/releases)
+   [GitHub releases page](https://github.com/kwtsms/moodle-local_kwtsms/releases)
    or from the [Moodle plugins directory](https://moodle.org/plugins/local_kwtsms).
 2. In Moodle, go to **Site administration > Plugins > Install plugins**.
 3. Drag the ZIP into the installer and click **Install plugin from the ZIP file**.
@@ -82,7 +82,7 @@ Pick whichever option suits your workflow. All three install the same version.
 
 1. Clone or extract the plugin into `local/kwtsms/` under your Moodle directory:
    ```bash
-   git clone https://github.com/boxlinknet/moodle-local_kwtsms.git local/kwtsms
+   git clone https://github.com/kwtsms/moodle-local_kwtsms.git local/kwtsms
    ```
 2. Visit **Site administration > Notifications** to complete the installation.
 
@@ -131,7 +131,7 @@ Pick whichever option suits your workflow. All three install the same version.
 ## Support
 
 - kwtSMS account support: https://www.kwtsms.com/support.html
-- Plugin issues: https://github.com/boxlinknet/moodle-local_kwtsms/issues
+- Plugin issues: https://github.com/kwtsms/moodle-local_kwtsms/issues
 
 ## License
 
