@@ -101,7 +101,7 @@ $string['help_setup_step_settings'] = 'فعّل البوابة، اختر لغة
 $string['help_setup_step_templates'] = 'خصّص قوالب الرسائل الإنجليزية والعربية لكل حدث. استخدم المتغيرات لتخصيص الرسائل.';
 $string['help_setup_testmode_note'] = 'يُوصى بتفعيل <strong>وضع الاختبار</strong> في الإعدادات أثناء الإعداد الأولي. وضع الاختبار يرسل الرسائل إلى واجهة البرمجة بعلامة اختبار بحيث لا تُسلّم للهواتف ويمكن استرداد النقاط من قائمة الانتظار في kwtSMS.';
 $string['help_support'] = 'الدعم';
-$string['help_support_plugin'] = '<strong>مشاكل الإضافة:</strong> <a href="https://github.com/boxlinknet/moodle-local_kwtsms/issues" target="_blank">GitHub Issues</a> (بلاغات الأخطاء، طلبات الميزات، تهيئة الإضافة)';
+$string['help_support_plugin'] = '<strong>مشاكل الإضافة:</strong> <a href="https://github.com/kwtsms/moodle-local_kwtsms/issues" target="_blank">GitHub Issues</a> (بلاغات الأخطاء، طلبات الميزات، تهيئة الإضافة)';
 $string['help_support_provider'] = '<strong>دعم حساب kwtSMS:</strong> <a href="https://www.kwtsms.com/support.html" target="_blank">kwtsms.com/support</a> (الفوترة، معرّفات المرسل، التغطية، مشاكل API)';
 $string['help_support_text'] = 'لمشاكل حساب kwtSMS، تواصل مع <a href="https://www.kwtsms.com/support.html" target="_blank">دعم kwtSMS</a>. لمشاكل الإضافة، استخدم متتبع المشكلات في GitHub.';
 $string['help_troubleshooting'] = 'استكشاف الأخطاء وإصلاحها';

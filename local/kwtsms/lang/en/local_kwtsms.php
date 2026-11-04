@@ -101,7 +101,7 @@ $string['help_setup_step_settings'] = 'Enable the gateway, choose your default S
 $string['help_setup_step_templates'] = 'Customize the English and Arabic message templates for each event. Use placeholders to personalize messages.';
 $string['help_setup_testmode_note'] = 'It is recommended to enable <strong>Test Mode</strong> in Settings during initial setup. Test mode sends messages to the API with a test flag so they are not delivered to handsets and credits can be recovered from the kwtSMS queue.';
 $string['help_support'] = 'Support';
-$string['help_support_plugin'] = '<strong>Plugin Issues:</strong> <a href="https://github.com/boxlinknet/moodle-local_kwtsms/issues" target="_blank">GitHub Issues</a> (bug reports, feature requests, plugin configuration)';
+$string['help_support_plugin'] = '<strong>Plugin Issues:</strong> <a href="https://github.com/kwtsms/moodle-local_kwtsms/issues" target="_blank">GitHub Issues</a> (bug reports, feature requests, plugin configuration)';
 $string['help_support_provider'] = '<strong>kwtSMS Account Support:</strong> <a href="https://www.kwtsms.com/support.html" target="_blank">kwtsms.com/support</a> (billing, sender IDs, coverage, API issues)';
 $string['help_support_text'] = 'For kwtSMS account issues, contact <a href="https://www.kwtsms.com/support.html" target="_blank">kwtSMS support</a>. For plugin issues, use the GitHub Issues tracker.';
 $string['help_troubleshooting'] = 'Troubleshooting';
