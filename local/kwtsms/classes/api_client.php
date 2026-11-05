@@ -72,10 +72,30 @@ class api_client {
             (string) $password,
             $senderid ? (string) $senderid : 'KWT-SMS',
             !empty($testmode),
-            '' // Disable file logging; Moodle uses its own logging.
+            '', // Disable file logging; Moodle uses its own logging.
+            self::app_name() // 2026-11-05 14:51 +03: app token for the User-Agent, #939.
         );
 
         return self::$client;
+    }
+
+    /**
+     * Product token sent as the kwtsms-php app_name (User-Agent): "kwtsms-moodle/<release in version.php>".
+     *
+     * 2026-11-05 14:51 +03: added so kwtSMS can count accounts per integration (name and version only,
+     * no personal data); the release is read from version.php, not typed twice, #939.
+     *
+     * @return string
+     */
+    public static function app_name(): string {
+        static $token = null;
+        if ($token === null) {
+            $plugin = new \stdClass();
+            include(__DIR__ . '/../version.php');
+            $release = !empty($plugin->release) ? (string) $plugin->release : '0.0.0';
+            $token = 'kwtsms-moodle/' . $release;
+        }
+        return $token;
     }
 
     /**
@@ -122,7 +142,8 @@ class api_client {
      */
     public static function login(string $username, string $password): array {
         // Create a temporary client to verify credentials via the balance endpoint.
-        $tempclient = new \KwtSMS\KwtSMS($username, $password, 'KWT-SMS', false, '');
+        // 2026-11-05 14:51 +03: app token for the User-Agent, #939.
+        $tempclient = new \KwtSMS\KwtSMS($username, $password, 'KWT-SMS', false, '', self::app_name());
 
         // The verify() method calls the balance endpoint to validate credentials.
         [$ok, $balance, $error] = $tempclient->verify();

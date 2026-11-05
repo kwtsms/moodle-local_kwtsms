@@ -58,6 +58,16 @@ final class api_client_test extends \advanced_testcase {
     }
 
     /**
+     * Test that the User-Agent app token is kwtsms-moodle/<release from version.php>.
+     *
+     * 2026-11-05 14:51 +03: added with api_client::app_name(), #939.
+     */
+    public function test_app_name_uses_plugin_release(): void {
+        $release = \core_plugin_manager::instance()->get_plugin_info('local_kwtsms')->release;
+        $this->assertSame('kwtsms-moodle/' . $release, api_client::app_name());
+    }
+
+    /**
      * Test that is_enabled returns false when gateway_enabled is not set.
      */
     public function test_is_enabled_false_by_default(): void {
