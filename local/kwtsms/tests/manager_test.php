@@ -34,6 +34,9 @@ namespace local_kwtsms;
  * @covers \local_kwtsms\manager
  */
 final class manager_test extends \advanced_testcase {
+    // 2026-11-05 11:08 +03: sample number moved to 99912345678 (E.164 code 999 is unassigned), the old Kuwait
+    // sample belonged to a real person; every send here is skipped before the API, int-testnumber.
+
     /**
      * Set up each test with a fresh Moodle state.
      */
@@ -47,7 +50,7 @@ final class manager_test extends \advanced_testcase {
      */
     public function test_send_logs_skip_when_gateway_disabled(): void {
         // Gateway is disabled by default.
-        manager::send(['96598765432'], 'Test message', 'test_event');
+        manager::send(['99912345678'], 'Test message', 'test_event');
 
         global $DB;
         $logs = $DB->get_records('local_kwtsms_log');
@@ -63,7 +66,7 @@ final class manager_test extends \advanced_testcase {
     public function test_send_logs_skip_when_not_configured(): void {
         set_config('gateway_enabled', 1, 'local_kwtsms');
         // No credentials configured.
-        manager::send(['96598765432'], 'Test message', 'test_event');
+        manager::send(['99912345678'], 'Test message', 'test_event');
 
         global $DB;
         $logs = $DB->get_records('local_kwtsms_log');
@@ -81,7 +84,7 @@ final class manager_test extends \advanced_testcase {
         set_config('api_username', 'testuser', 'local_kwtsms');
         set_config('api_password', 'testpass', 'local_kwtsms');
         // Balance is 0 by default (no cache).
-        manager::send(['96598765432'], 'Test message', 'test_event');
+        manager::send(['99912345678'], 'Test message', 'test_event');
 
         global $DB;
         $logs = $DB->get_records('local_kwtsms_log');
@@ -100,7 +103,7 @@ final class manager_test extends \advanced_testcase {
             'firstname' => 'Test',
             'lastname' => 'User',
             'phone1' => '',
-            'phone2' => '96598765432',
+            'phone2' => '99912345678',
             'lang' => 'en',
         ];
         // Event not enabled, should return silently without logging.
@@ -143,7 +146,7 @@ final class manager_test extends \advanced_testcase {
         set_config('api_username', 'testuser', 'local_kwtsms');
         set_config('api_password', 'testpass', 'local_kwtsms');
         // Balance 0, so will be skipped after dedup, but should only log unique phones.
-        manager::send(['96598765432', '96598765432', '96598765432'], 'Test', 'test_event');
+        manager::send(['99912345678', '99912345678', '99912345678'], 'Test', 'test_event');
 
         global $DB;
         $logs = $DB->get_records('local_kwtsms_log');

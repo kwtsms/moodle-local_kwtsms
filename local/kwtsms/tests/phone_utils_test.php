@@ -30,35 +30,38 @@ namespace local_kwtsms;
  * @covers \local_kwtsms\phone_utils
  */
 final class phone_utils_test extends \advanced_testcase {
+    // 2026-11-05 11:08 +03: sample numbers moved to 99912345678 (E.164 code 999 is unassigned), the old Kuwait
+    // sample belonged to a real person; no test here needs real Kuwait digits, int-testnumber.
+
     /**
      * Test that normalize strips +, 00, spaces, dashes, and parentheses.
      */
     public function test_normalize_international(): void {
         // Plus prefix stripped.
-        $this->assertEquals('96598765432', phone_utils::normalize('+96598765432'));
+        $this->assertEquals('99912345678', phone_utils::normalize('+99912345678'));
 
         // Double-zero international prefix stripped.
-        $this->assertEquals('96598765432', phone_utils::normalize('0096598765432'));
+        $this->assertEquals('99912345678', phone_utils::normalize('0099912345678'));
 
         // Spaces stripped.
-        $this->assertEquals('96598765432', phone_utils::normalize('965 9876 5432'));
+        $this->assertEquals('99912345678', phone_utils::normalize('999 1234 5678'));
 
         // Dashes stripped.
-        $this->assertEquals('96598765432', phone_utils::normalize('965-9876-5432'));
+        $this->assertEquals('99912345678', phone_utils::normalize('999-1234-5678'));
 
         // Parentheses stripped.
-        $this->assertEquals('96598765432', phone_utils::normalize('(965) 98765432'));
+        $this->assertEquals('99912345678', phone_utils::normalize('(999) 12345678'));
 
         // Combination of all.
-        $this->assertEquals('96598765432', phone_utils::normalize('+965 (9876) 5432'));
+        $this->assertEquals('99912345678', phone_utils::normalize('+999 (1234) 5678'));
     }
 
     /**
      * Test that normalize prepends country code when phone starts with 0.
      */
     public function test_normalize_local_with_country_code(): void {
-        // Kuwait local number with leading 0.
-        $this->assertEquals('96598765432', phone_utils::normalize('098765432', '965'));
+        // Local number with leading 0, unassigned country code 999.
+        $this->assertEquals('99912345678', phone_utils::normalize('012345678', '999'));
 
         // Saudi local number with leading 0.
         $this->assertEquals('9665698741236', phone_utils::normalize('05698741236', '966'));
@@ -68,7 +71,7 @@ final class phone_utils_test extends \advanced_testcase {
      * Test that normalize leaves the number unchanged when no country code is given.
      */
     public function test_normalize_local_without_country_code(): void {
-        $this->assertEquals('098765432', phone_utils::normalize('098765432'));
+        $this->assertEquals('012345678', phone_utils::normalize('012345678'));
     }
 
     /**
@@ -76,13 +79,13 @@ final class phone_utils_test extends \advanced_testcase {
      */
     public function test_normalize_arabic_digits(): void {
         // Arabic-Indic digits (U+0660..U+0669).
-        $this->assertEquals('96598765432', phone_utils::normalize('٩٦٥٩٨٧٦٥٤٣٢'));
+        $this->assertEquals('99912345678', phone_utils::normalize('٩٩٩١٢٣٤٥٦٧٨'));
 
         // Extended Arabic-Indic digits (U+06F0..U+06F9).
-        $this->assertEquals('96598765432', phone_utils::normalize('۹۶۵۹۸۷۶۵۴۳۲'));
+        $this->assertEquals('99912345678', phone_utils::normalize('۹۹۹۱۲۳۴۵۶۷۸'));
 
         // Mixed Arabic-Indic and Latin.
-        $this->assertEquals('96598765432', phone_utils::normalize('٩٦٥98765432'));
+        $this->assertEquals('99912345678', phone_utils::normalize('٩٩٩12345678'));
     }
 
     /**
@@ -90,7 +93,7 @@ final class phone_utils_test extends \advanced_testcase {
      */
     public function test_validate(): void {
         // Valid: 8+ digits.
-        $this->assertTrue(phone_utils::validate('96598765432'));
+        $this->assertTrue(phone_utils::validate('99912345678'));
         $this->assertTrue(phone_utils::validate('12345678'));
 
         // Invalid: empty string.
@@ -102,7 +105,7 @@ final class phone_utils_test extends \advanced_testcase {
 
         // Invalid: contains non-digit characters.
         $this->assertFalse(phone_utils::validate('9659876abc'));
-        $this->assertFalse(phone_utils::validate('+96598765432'));
+        $this->assertFalse(phone_utils::validate('+99912345678'));
     }
 
     /**
@@ -110,8 +113,8 @@ final class phone_utils_test extends \advanced_testcase {
      */
     public function test_get_user_phone(): void {
         // Prefers phone2 when both are set.
-        $user = (object) ['phone1' => '11111111', 'phone2' => '96598765432'];
-        $this->assertEquals('96598765432', phone_utils::get_user_phone($user));
+        $user = (object) ['phone1' => '11111111', 'phone2' => '99912345678'];
+        $this->assertEquals('99912345678', phone_utils::get_user_phone($user));
 
         // Falls back to phone1 when phone2 is empty.
         $user = (object) ['phone1' => '11111111', 'phone2' => ''];
@@ -130,29 +133,29 @@ final class phone_utils_test extends \advanced_testcase {
      * Test deduplicate removes duplicate phone numbers while preserving order.
      */
     public function test_deduplicate(): void {
-        $input = ['96598765432', '96512345678', '96598765432', '96512345678', '96511112222'];
-        $expected = ['96598765432', '96512345678', '96511112222'];
+        $input = ['99912345678', '96512345678', '99912345678', '96512345678', '96511112222'];
+        $expected = ['99912345678', '96512345678', '96511112222'];
         $this->assertEquals($expected, phone_utils::deduplicate($input));
 
         // Empty array stays empty.
         $this->assertEquals([], phone_utils::deduplicate([]));
 
         // Single element stays unchanged.
-        $this->assertEquals(['96598765432'], phone_utils::deduplicate(['96598765432']));
+        $this->assertEquals(['99912345678'], phone_utils::deduplicate(['99912345678']));
     }
 
     /**
      * Test filter_by_coverage splits phones into covered and uncovered arrays.
      */
     public function test_filter_by_coverage(): void {
-        $phones = ['96598765432', '97312345678', '4412345678901', '96512345678'];
-        $coverage = ['965', '973'];
+        $phones = ['99912345678', '97312345678', '4412345678901', '96512345678'];
+        $coverage = ['965', '973', '999'];
 
         $result = phone_utils::filter_by_coverage($phones, $coverage);
 
         $this->assertArrayHasKey('covered', $result);
         $this->assertArrayHasKey('uncovered', $result);
-        $this->assertEquals(['96598765432', '97312345678', '96512345678'], $result['covered']);
+        $this->assertEquals(['99912345678', '97312345678', '96512345678'], $result['covered']);
         $this->assertEquals(['4412345678901'], $result['uncovered']);
 
         // Empty coverage means all uncovered.

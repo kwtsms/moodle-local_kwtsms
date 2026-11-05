@@ -32,7 +32,9 @@ class ApiErrors
         ],
         'ERR006' => [
             'description' => 'No valid phone numbers.',
-            'action' => 'Make sure each number includes the country code (e.g., 96598765432 for Kuwait, not 98765432).',
+            // 2026-11-05 11:09 +03: sample number replaced by the 965XXXXXXXX placeholder in ERR006 and ERR025,
+            // the old sample belonged to a real person; local patch until kwtsms-php upstream matches, int-testnumber.
+            'action' => 'Make sure each number includes the country code (e.g., 965XXXXXXXX for Kuwait, not XXXXXXXX).',
         ],
         'ERR007' => [
             'description' => 'Too many numbers in a single request (maximum 200).',
@@ -88,7 +90,7 @@ class ApiErrors
         ],
         'ERR025' => [
             'description' => 'Invalid phone number.',
-            'action' => 'Make sure the number includes the country code (e.g., 96598765432 for Kuwait, not 98765432).',
+            'action' => 'Make sure the number includes the country code (e.g., 965XXXXXXXX for Kuwait, not XXXXXXXX).',
         ],
         'ERR026' => [
             'description' => 'This country is not activated on your account.',

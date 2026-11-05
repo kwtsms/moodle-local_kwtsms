@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Docs
 - ERR028 description and action no longer state a fixed 15-second wait. Duplicate SMS protection is opt-in per account and its window is set per account (10 seconds by default).
+- Phone number examples in settings help, the Help tab (English and Arabic) and API error actions now use the placeholder 965XXXXXXXX. Unit tests use 99912345678 (unassigned country code 999); CI passes the optional `KWTSMS_TEST_NUMBER` secret to the PHPUnit step.
 
 ## [1.0.2] - 2026-04-19
 
