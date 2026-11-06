@@ -1,49 +1,42 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/readme-header-dark.png">
+  <img alt="kwtSMS: SMS gateway for Kuwait" src=".github/assets/readme-header-light.png">
+</picture>
+
 # kwtSMS for Moodle
 
-[![Moodle Plugin Directory](https://img.shields.io/badge/Moodle.org-local__kwtsms-orange.svg)](https://moodle.org/plugins/local_kwtsms)
+[![Moodle Plugins Directory](https://img.shields.io/badge/Moodle.org-local__kwtsms-orange.svg)](https://moodle.org/plugins/local_kwtsms)
 [![Moodle](https://img.shields.io/badge/Moodle-4.3+-orange.svg)](https://moodle.org)
 [![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4.svg)](https://www.php.net)
+[![Release](https://img.shields.io/github/v/release/kwtsms/moodle-local_kwtsms)](https://github.com/kwtsms/moodle-local_kwtsms/releases)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![GitHub issues](https://img.shields.io/github/issues/kwtsms/moodle-local_kwtsms)](https://github.com/kwtsms/moodle-local_kwtsms/issues)
-[![GitHub release](https://img.shields.io/github/v/release/kwtsms/moodle-local_kwtsms?include_prereleases)](https://github.com/kwtsms/moodle-local_kwtsms/releases)
 
-Send SMS notifications to students and administrators via the kwtSMS gateway (kwtsms.com).
+Send SMS to your students when they enrol, get a grade, submit work or complete a course, and to your admins when a
+new user registers, through kwtSMS, the Kuwaiti SMS gateway.
 
-Available on the official [Moodle Plugins Directory](https://moodle.org/plugins/local_kwtsms).
-
-## About kwtSMS
-
-[kwtSMS](https://www.kwtsms.com) is a Kuwait-based SMS gateway providing reliable message delivery across the Middle East and internationally. Features include:
-
-- SMS delivery to 200+ countries
-- Transactional and promotional sender IDs
-- Real-time balance and delivery tracking
-- Arabic and English message support
-- REST/JSON API with client libraries for PHP, Python, JavaScript, and more
-
-**[Sign up for a kwtSMS account](https://www.kwtsms.com/account/signup/)** to get your API credentials and start sending SMS from your Moodle site.
-
-For more integrations, visit the [kwtSMS Integrations page](https://www.kwtsms.com/integrations.html).
+kwtSMS delivers to Zain, Ooredoo, stc and Virgin in Kuwait and to more than 200 countries, with your own Sender ID,
+free API testing and credits that do not expire.
 
 ## Features
 
-- **Event-driven SMS:** Automatic notifications for enrollment, unenrollment, grading, course completion, quiz submission, assignment submission, and new user registration
-- **7-tab admin interface:** Dashboard, Settings, Gateway, Templates, Integrations, Logs, Help
-- **Multilingual templates:** English + Arabic with placeholder support ({firstname}, {coursename}, {grade}, etc.)
-- **Gateway management:** Login/logout, balance monitoring, sender ID selection, country code configuration
-- **SMS logging:** Full log with status tracking, phone masking, filtering, pagination, and CSV export
-- **Daily sync:** Automatic refresh of balance, sender IDs, and coverage data
-- **RTL support:** Right-to-left layout support for Arabic interfaces
-- **Test mode:** Send to API without delivery for development and testing
+**Notifications**
+- Seven Moodle events: enrolment, unenrolment, grade posted, course completed, quiz submitted, assignment submitted,
+  and new user registered (to admin phones).
+- English and Arabic templates with placeholders such as `{firstname}`, `{coursename}` and `{grade}`.
+
+**Admin**
+- One admin page with seven tabs: Dashboard, Settings, Gateway, Templates, Integrations, Logs and Help.
+- Balance, Sender IDs and coverage synced daily, with a low balance alert.
+- Message log with phone masking, filters and CSV export.
+- Test mode: messages are queued on kwtSMS and not delivered.
+- Right-to-left layout for Arabic.
 
 ## Requirements
 
-- **Moodle:** 4.3 or later (tested on 4.3, 4.4, 4.5, 5.0, 5.1, 5.2)
-- **PHP:** 8.1 or later (tested on 8.1, 8.2, 8.3)
-- **Database:** PostgreSQL or MariaDB/MySQL (both verified in CI)
-- A kwtSMS account (sign up at https://www.kwtsms.com)
+- Moodle 4.3 or later, PHP 8.1 or later, PostgreSQL or MariaDB/MySQL.
+- A kwtSMS account (free test account, no papers): https://www.kwtsms.com/cportal/signup/
 
-### Tested compatibility matrix
+### Tested versions
 
 Every push runs the Moodle Plugin CI across the full matrix below. All jobs green as of v1.0.2.
 
@@ -91,12 +84,18 @@ Pick whichever option suits your workflow. All three install the same version.
 1. Go to **Site administration > Plugins > Local plugins > kwtSMS**.
 2. Open the **Gateway** tab and log in with your kwtSMS API credentials.
 
-## Configuration
+## Setup
 
-1. **Gateway tab:** Enter your API username and password, click Login. Select your Sender ID and default country code.
-2. **Settings tab:** Enable the gateway, configure test mode, set admin phone numbers, and set the low balance alert threshold.
-3. **Integrations tab:** Enable the events you want to trigger SMS notifications.
-4. **Templates tab:** Customize the English and Arabic SMS message templates for each event.
+1. Go to **Site administration > Plugins > Local plugins > kwtSMS**.
+2. **Gateway** tab: enter the API username and password of your kwtSMS account (not your mobile number), click
+   **Login**, then choose your Sender ID and default country code.
+3. **Settings** tab: enable the gateway, turn on test mode for a first try, add admin phone numbers and the low balance
+   threshold.
+4. **Integrations** tab: choose the events that send SMS.
+5. **Templates** tab: adjust the English and Arabic messages.
+
+Test mode messages are not delivered, but their credits are held until you delete them from the Sending Queue in your
+kwtSMS account.
 
 ## Supported Events
 
@@ -121,19 +120,34 @@ Pick whichever option suits your workflow. All three install the same version.
 | `{activityname}` | Quiz/Assignment | Activity name |
 | `{sitename}` | All events | Moodle site name |
 
-## Sender ID
+## Arabic
 
-`KWT-SMS` is a shared testing sender ID. For production use, register a private sender ID through your kwtSMS account:
+The plugin interface and every template are available in Arabic, with a right-to-left layout. Arabic SMS are sent as
+Unicode: one SMS page holds 70 Arabic characters, against 160 English ones.
 
-- **Transactional:** Required for OTP and alerts, bypasses DND filtering
-- **Promotional:** For announcements and marketing, subject to DND filtering
+## FAQ
+
+**Which username do I use?** The API username and password of your kwtSMS account, not your mobile number.
+
+**Why do test messages not arrive?** Test mode queues messages without delivering them. Turn it off in Settings.
+
+**What is a Sender ID?** The name shown as the sender on the phone. `KWT-SMS` is a shared test Sender ID; for real
+messages register your own. See the [Sender ID help](https://www.kwtsms.com/sender-id-help.html).
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Support
 
-- kwtSMS account support: https://www.kwtsms.com/support.html
-- Plugin issues: https://github.com/kwtsms/moodle-local_kwtsms/issues
+Help: https://www.kwtsms.com/support.html | FAQ: https://www.kwtsms.com/faq/ |
+API: [developers](https://www.kwtsms.com/developers.html), [API reference](https://www.kwtsms.com/api-documentation.html) |
+[Issues](https://github.com/kwtsms/moodle-local_kwtsms/issues)
+
+## Security
+
+See [SECURITY.md](SECURITY.md).
 
 ## License
 
-This plugin is licensed under the GNU GPL v3 or later.
-See https://www.gnu.org/copyleft/gpl.html for details.
+GNU GPL v3 or later, (c) kwtSMS (BoxLink Center). See https://www.gnu.org/copyleft/gpl.html.
