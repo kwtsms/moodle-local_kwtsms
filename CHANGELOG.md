@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-11-07
+
 ### Added
 - Requests to kwtSMS carry the integration name and version (no personal data) so kwtSMS can see which integrations are in use.
 

@@ -24,8 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2026041901;
+// 2026-11-07 02:54 +03: 1.0.3 (User-Agent, placeholder number, docs). int-rerelease-number
+$plugin->version   = 2026110700;
 $plugin->requires  = 2023100900;      // Moodle 4.3+.
 $plugin->component = 'local_kwtsms';
 $plugin->maturity  = MATURITY_BETA;
-$plugin->release   = '1.0.2';
+$plugin->release   = '1.0.3';
