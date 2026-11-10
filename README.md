@@ -14,7 +14,7 @@
 Send SMS to your students when they enrol, get a grade, submit work or complete a course, and to your admins when a
 new user registers, through kwtSMS, the Kuwaiti SMS gateway.
 
-kwtSMS delivers to Zain, Ooredoo, stc and Virgin in Kuwait and to more than 200 countries, with your own Sender ID,
+kwtSMS delivers to Zain, Ooredoo, STC and Virgin in Kuwait and to more than 200 countries, with your own Sender ID,
 free API testing and credits that do not expire.
 
 ## Features
